@@ -15,6 +15,7 @@ URL:		http://search.cpan.org/dist/%{module}
 Buildrequires:	perl-devel
 %endif
 BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 This is a quick implementation of the minimal interface to Readline
