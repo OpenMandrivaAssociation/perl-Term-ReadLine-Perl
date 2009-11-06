@@ -1,21 +1,22 @@
-%define module  Term-ReadLine-Perl
-%define name    perl-%{module}
-%define version 1.0302
-%define release %mkrel 6
+%define upstream_name    Term-ReadLine-Perl
+%define upstream_version 1.0303
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:	Perl interface to readline libraries
-License:	GPL or Artistic
+License:	GPL+ or Artistic
 Group:		Development/Perl
-Source:		ftp://ftp.perl.org/pub/CPAN/modules/by-module/Term/%{module}-%{version}.tar.bz2
-URL:		http://search.cpan.org/dist/%{module}
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/Term/%{upstream_name}-%{upstream_version}.tar.gz
+
 %if %{mdkversion} < 1010
 Buildrequires:	perl-devel
 %endif
+
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This is a quick implementation of the minimal interface to Readline
@@ -25,7 +26,7 @@ add some minimal changes, like using Term::ReadKey if present, and
 correct work under xterm). 
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -45,4 +46,3 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc CHANGES README
 %{perl_vendorlib}/Term
-
